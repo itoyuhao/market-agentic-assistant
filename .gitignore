@@ -23,6 +23,7 @@ dist/
 # Data output (do NOT commit personal digests — they contain timestamps, portfolio clues)
 digests/*.md
 !digests/.gitkeep
+digests/.logs/
 logs/
 
 # OS
