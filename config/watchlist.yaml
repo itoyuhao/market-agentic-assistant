@@ -1,0 +1,68 @@
+# Market Agent Watchlist
+# yfinance tickers. Taiwan stocks use .TW suffix (or .TWO for OTC).
+#
+# news_query (optional): string passed to NewsAPI /everything. Omit for tickers
+# where per-name news is not useful (broad ETFs, index funds). The daily news
+# fetcher skips any entry without a news_query.
+
+us:
+  - ticker: VOO
+    name: Vanguard S&P 500 ETF
+    category: index_etf
+    notes: 美股大盤代表
+    # news_query omitted — S&P 500 news is too broad to filter usefully per-ticker
+
+  - ticker: QQQ
+    name: Invesco Nasdaq 100 ETF
+    category: index_etf
+    notes: 科技股大盤代表
+    # news_query omitted — same reason
+
+  - ticker: NVDA
+    name: NVIDIA
+    category: semiconductor
+    notes: AI 晶片龍頭
+    news_query: NVIDIA
+
+  - ticker: TSLA
+    name: Tesla
+    category: ev_tech
+    notes: 電動車 / AI / 能源
+    news_query: Tesla
+
+  - ticker: WY
+    name: Weyerhaeuser
+    category: reit_timber
+    notes: 林業 REIT，與房市/利率高度相關
+    news_query: Weyerhaeuser
+
+  - ticker: INTC
+    name: Intel
+    category: semiconductor
+    notes: 老牌半導體，轉型中
+    news_query: Intel
+
+  - ticker: ARM
+    name: Arm Holdings
+    category: semiconductor
+    notes: IP 授權模式半導體
+    news_query: Arm Holdings
+
+tw:
+  - ticker: "0050.TW"
+    name: 元大台灣50 ETF
+    category: index_etf
+    notes: 台股大盤代表
+    # news_query omitted — ETF
+
+  - ticker: "2330.TW"
+    name: 台積電
+    category: semiconductor
+    notes: 晶圓代工龍頭
+    news_query: TSMC
+
+  - ticker: "2454.TW"
+    name: 聯發科
+    category: semiconductor
+    notes: IC 設計龍頭
+    news_query: MediaTek

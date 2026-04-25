@@ -1,0 +1,84 @@
+# Macro indicators pulled from FRED (Federal Reserve Economic Data)
+# API docs: https://fred.stlouisfed.org/docs/api/fred/
+# All series are free and high-quality. Apply for an API key at:
+#   https://fred.stlouisfed.org/docs/api/api_key.html
+#
+# `unit` values drive display formatting downstream:
+#   percent        — value is already a percentage (e.g. 3.64 means 3.64%)
+#   index          — dimensionless index level (VIX, DXY, CPI)
+#   millions_usd   — USD, native FRED scale = millions
+#   billions_usd   — USD, native FRED scale = billions
+
+indicators:
+  - id: T10Y2Y
+    name: 10Y-2Y Treasury Spread
+    chinese_name: 美債 10Y-2Y 利差
+    category: yield_curve
+    unit: percent
+    watch_for: 經濟週期 / 衰退預警。倒掛（負值）歷史上常預示衰退。
+
+  - id: DFF
+    name: Federal Funds Effective Rate
+    chinese_name: 聯邦基金有效利率
+    category: monetary_policy
+    unit: percent
+    watch_for: Fed 實際政策利率水準。
+
+  - id: SOFR
+    name: Secured Overnight Financing Rate
+    chinese_name: 有擔保隔夜融資利率
+    category: liquidity
+    unit: percent
+    watch_for: 短端融資成本；突破 Fed Funds 上緣代表流動性緊張。
+
+  - id: UNRATE
+    name: Unemployment Rate
+    chinese_name: 失業率
+    category: labor
+    unit: percent
+    watch_for: 勞動市場健康度；Sahm Rule 預警衰退。
+
+  - id: CPIAUCSL
+    name: Consumer Price Index (All Urban Consumers)
+    chinese_name: CPI 消費者物價指數
+    category: inflation
+    unit: index
+    watch_for: 通膨水準；Fed 的 mandate 之一。CPI 是累積指數，10Y percentile 永遠接近 100%；看 MoM/YoY 變化才有意義。
+
+  - id: VIXCLS
+    name: CBOE Volatility Index
+    chinese_name: VIX 恐慌指數
+    category: sentiment
+    unit: index
+    watch_for: 隱含波動率；> 20 市場不安、> 30 恐慌、< 15 過度樂觀。
+
+  - id: DTWEXBGS
+    name: Trade Weighted U.S. Dollar Index (Broad Goods and Services)
+    chinese_name: 美元指數（貿易加權）
+    category: currency
+    unit: index
+    watch_for: 美元相對強弱；對新興市場、商品、海外收入型美股有壓力/利多。
+
+  - id: WALCL
+    name: Fed Balance Sheet (Total Assets)
+    chinese_name: 聯準會資產負債表
+    category: liquidity
+    unit: millions_usd
+    watch_for: QE / QT 狀態；整體流動性大方向。
+
+  - id: WTREGEN
+    name: Treasury General Account
+    chinese_name: 財政部 TGA 帳戶
+    category: liquidity
+    unit: millions_usd
+    watch_for: 財政部放款/回收現金；TGA 增加 = 市場流動性被抽走。
+
+  - id: RRPONTSYD
+    name: Overnight Reverse Repo
+    chinese_name: 隔夜逆回購
+    category: liquidity
+    unit: billions_usd
+    watch_for: 貨幣市場閒置資金；RRP 下降表示資金回流到一般市場。
+
+# Derived / supplementary indicators (computed from above):
+#   net_liquidity = WALCL - WTREGEN - (RRPONTSYD × 1000)   # note: RRP is in billions, others in millions
