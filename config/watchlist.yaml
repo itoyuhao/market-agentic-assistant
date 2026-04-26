@@ -48,7 +48,33 @@ us:
     notes: IP 授權模式半導體
     news_query: Arm Holdings
 
+  # ---- 2026-04 新增（游庭皓 8 集逐字稿頻率分析）-------------------------------
+  - ticker: DIA
+    name: SPDR Dow Jones Industrial Average ETF
+    category: index_etf
+    notes: 道瓊指數代表（游庭皓每集 routine 點名）
+    # news_query omitted — broad index ETF
+
+  - ticker: SOXX
+    name: iShares Semiconductor ETF
+    category: semiconductor_etf
+    notes: 費城半導體指數代表（游庭皓每集 routine 點名；2026-04 連 17 紅）
+    # news_query omitted — sector ETF
+
+  # ---- 2026-04-26 新增 -------------------------------------------------------
+  - ticker: ORCL
+    name: Oracle
+    category: enterprise_software
+    notes: 企業軟體 / 雲端基礎設施（OCI）/ 資料庫龍頭
+    news_query: Oracle
+
 tw:
+  - ticker: "^TWII"
+    name: 台股加權指數
+    category: index
+    notes: 台股大盤指數本身（vs 0050 是追蹤前 50 大的 ETF；游庭皓報數時用 ^TWII 點數）
+    # news_query omitted — index
+
   - ticker: "0050.TW"
     name: 元大台灣50 ETF
     category: index_etf
@@ -66,3 +92,17 @@ tw:
     category: semiconductor
     notes: IC 設計龍頭
     news_query: MediaTek
+
+  # ---- 2026-04-26 新增：日本 ETF 持倉（持有部位、必須追蹤）-------------------
+  # 兩檔均為台灣上市、底層持有日股的主動式 ETF。報酬 = 日股表現 × USD/JPY × USD/TWD。
+  # USD/JPY 變動的解讀請對照 macro_indicators.yaml 的 DEXJPUS。
+
+  - ticker: "00955.TWO"
+    name: 中信日本商社 ETF (CTBC Japan Commercial and Wholesale Trade)
+    category: japan_etf
+    notes: 追蹤 NYSE FactSet Japan Commercial and Wholesale Index；持股以日本五大商社（三井/伊藤忠/丸紅/三菱商事/住友商事）為主；自有持倉。注意：上櫃標的、ticker 後綴是 .TWO 不是 .TW
+
+  - ticker: "00951.TW"
+    name: 台新日本半導體 ETF
+    category: japan_etf
+    notes: 追蹤 NYSE FactSet Japan Semiconductor Index；2024-07 上市、全台首檔日本半導體 ETF；自有持倉

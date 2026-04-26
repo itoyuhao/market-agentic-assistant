@@ -80,5 +80,50 @@ indicators:
     unit: billions_usd
     watch_for: 貨幣市場閒置資金；RRP 下降表示資金回流到一般市場。
 
+  # ---- 2026-04 新增（游庭皓 8 集逐字稿頻率分析）-------------------------------
+  # 動機：原本 yaml 偏「流動性派」(WALCL/TGA/RRP/SOFR)，但游庭皓觀察的核心是
+  #   油價 + 估值 + 利率水準 + 勞動先行指標。補上他每集 routine 會掃的維度。
+  # 完整分析背景見 Claude memory: project_yutinghao_framework.md
+
+  - id: DCOILWTICO
+    name: Crude Oil WTI Spot Price (Cushing)
+    chinese_name: WTI 原油現貨價（庫欣）
+    category: commodity
+    unit: usd_per_barrel
+    watch_for: 通膨上游、聯準會政策空間、地緣政治反應。每桶 80-100 美元是近年常態；快速上行常傳導至 PPI 與航運成本。
+
+  - id: DGS10
+    name: 10-Year Treasury Constant Maturity Rate
+    chinese_name: 美國 10 年期公債殖利率
+    category: yield_curve
+    unit: percent
+    watch_for: 利率水準絕對值；補 T10Y2Y 利差看不到的「期限溢酬 / Fed 政策獨立性」。突破 5% 常引發股債同跌。
+
+  - id: PPIACO
+    name: Producer Price Index by Commodity (All Commodities)
+    chinese_name: 生產者物價指數 PPI（全商品）
+    category: inflation
+    unit: index
+    watch_for: 上游通膨領先指標（通常領先 CPI 1-3 個月）。能源價格上行時 PPI 是首先反應的環節。
+
+  - id: ICSA
+    name: Initial Claims (Unemployment Insurance)
+    chinese_name: 美國初領失業救濟金（週頻）
+    category: labor
+    unit: persons
+    watch_for: 勞動市場領先指標（週頻、最及時）。低檔（< 25 萬）代表企業未釋放員工；穿越 30 萬常被視為衰退訊號。
+
+  # ---- 2026-04-26 新增：日本部位匯率追蹤 ------------------------------------
+  # 動機：使用者持有 00955.TW（日本商社 ETF）和 00951.TW（日本半導體 ETF），
+  # 兩檔報酬都直接受 USD/JPY 變動影響。沒有這條，看 ETF 漲跌會把
+  # 「日股動」和「日圓動」混為一談。
+
+  - id: DEXJPUS
+    name: Japanese Yen to U.S. Dollar Exchange Rate
+    chinese_name: 日圓兌美元匯率（USD/JPY）
+    category: currency
+    unit: index
+    watch_for: 數值＝1 美元換多少日圓（如 150 = 弱勢日圓、130 = 強勢日圓）。日圓貶值會壓低台灣投資人持有日股 ETF 的台幣計價報酬。BOJ 政策正常化進度的最即時 proxy。
+
 # Derived / supplementary indicators (computed from above):
 #   net_liquidity = WALCL - WTREGEN - (RRPONTSYD × 1000)   # note: RRP is in billions, others in millions
